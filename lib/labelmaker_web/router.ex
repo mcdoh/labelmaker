@@ -14,10 +14,17 @@ defmodule LabelmakerWeb.Router do
     plug :accepts, ["json"]
   end
 
+  # scope "/", LabelmakerWeb do
+  #   pipe_through :browser
+  #
+  #   get "/", PageController, :home
+  # end
+
   scope "/", LabelmakerWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    live "/", Home
+    live "/:label", Label
   end
 
   # Other scopes may use custom stacks.
