@@ -2,20 +2,34 @@ defmodule LabelmakerWeb.Label do
   use LabelmakerWeb, :live_view
 
   @label_dir Path.join(:code.priv_dir(:labelmaker), "static/labels")
+  File.mkdir_p!(@label_dir)
 
-  def mount(%{"label" => label}, _session, socket) do
-    File.mkdir_p!(@label_dir)
+  @defaults %{
+    "label" => "Labelmaker",
+    "font" => "Helvetica",
+    "color" => "black",
+    "size" => "24"
+  }
 
-    filename = "#{label}.png"
+  @permitted_keys Map.keys(@defaults)
+
+  def mount(params, _session, socket) do
+    options =
+      @defaults
+      |> Map.merge(params)
+      |> Map.take(@permitted_keys)
+
+    IO.inspect(options)
+    filename = "#{options["label"]}.png"
     filepath = Path.join(@label_dir, filename)
 
     unless File.exists?(filepath) do
-      generate_label_image(label, filepath)
+      generate_label_image(options, filepath)
     end
 
     {:ok,
      assign(socket,
-       label: label,
+       label: options["label"],
        image_path: ~p"/labels/#{filename}"
      )}
   end
@@ -29,17 +43,17 @@ defmodule LabelmakerWeb.Label do
     """
   end
 
-  defp generate_label_image(label, filepath) do
+  defp generate_label_image(options, filepath) do
     args = [
       "-background",
       "none",
       "-fill",
-      "black",
+      options["color"],
       "-pointsize",
-      "24",
+      options["size"],
       "-font",
-      "Comic-Sans-MS",
-      "label:#{label}",
+      options["font"],
+      "label:#{options["label"]}",
       filepath
     ]
 
@@ -50,4 +64,8 @@ defmodule LabelmakerWeb.Label do
     # File.rm(tmp_file)
     # Base.encode64(png_binary)
   end
+
+  # defp get_image_settings(socket) do
+  #
+  # end
 end
