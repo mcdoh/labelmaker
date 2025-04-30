@@ -19,12 +19,11 @@ defmodule LabelmakerWeb.Label do
       |> Map.merge(params)
       |> Map.take(@permitted_keys)
 
-    IO.inspect(options)
     filename = "#{options["label"]}.png"
     filepath = Path.join(@label_dir, filename)
 
     unless File.exists?(filepath) do
-      generate_label_image(options, filepath)
+      generate_image(options, filepath)
     end
 
     {:ok,
@@ -43,7 +42,7 @@ defmodule LabelmakerWeb.Label do
     """
   end
 
-  defp generate_label_image(options, filepath) do
+  defp generate_image(options, filepath) do
     args = [
       "-background",
       "none",
@@ -58,14 +57,5 @@ defmodule LabelmakerWeb.Label do
     ]
 
     {_, 0} = System.cmd("magick", args)
-
-    IO.puts(filepath)
-    # png_binary = File.read!(filepath)
-    # File.rm(tmp_file)
-    # Base.encode64(png_binary)
   end
-
-  # defp get_image_settings(socket) do
-  #
-  # end
 end
