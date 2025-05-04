@@ -1,5 +1,6 @@
 defmodule LabelmakerWeb.Label do
   use LabelmakerWeb, :live_view
+  alias LabelmakerWeb.Constants
 
   @label_dir Path.join(:code.priv_dir(:labelmaker), "static/labels")
   File.mkdir_p!(@label_dir)
@@ -40,6 +41,12 @@ defmodule LabelmakerWeb.Label do
   end
 
   def render(assigns) do
+    IO.inspect(Constants.color_count())
+    IO.inspect(Constants.colors())
+
+    IO.inspect(Constants.font_count())
+    IO.inspect(Constants.fonts())
+
     ~H"""
     <div>
       <h1>Label: {@label}</h1>
