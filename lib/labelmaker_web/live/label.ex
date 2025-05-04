@@ -19,7 +19,13 @@ defmodule LabelmakerWeb.Label do
       |> Map.merge(params)
       |> Map.take(@permitted_keys)
 
-    filename = "#{options["label"]}.png"
+    filename =
+      options
+      |> inspect()
+      |> (fn str -> :crypto.hash(:sha256, str) end).()
+      |> Base.encode16(case: :lower)
+
+    filename = filename <> ".png"
     filepath = Path.join(@label_dir, filename)
 
     unless File.exists?(filepath) do
