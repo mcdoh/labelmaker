@@ -6,10 +6,23 @@ defmodule LabelmakerWeb.LabelController do
   File.mkdir_p!(@label_dir)
 
   def show(conn, params) do
+    params =
+      params
+      |> Map.take(Constants.permitted_keys())
+      |> Enum.filter(fn {k, v} ->
+        case k do
+          "color" -> v in Constants.colors()
+          "font" -> v in Constants.fonts()
+          "label" -> String.length(v) <= Constants.max_label_length()
+          "size" -> v in Constants.sizes()
+          _ -> true
+        end
+      end)
+      |> Map.new()
+
     options =
       Constants.defaults()
       |> Map.merge(params)
-      |> Map.take(Constants.permitted_keys())
 
     filename =
       options
@@ -40,6 +53,9 @@ defmodule LabelmakerWeb.LabelController do
       "-font",
       options["font"],
       "label:#{options["label"]}",
+      "-set",
+      "comment",
+      inspect(options),
       filepath
     ]
 

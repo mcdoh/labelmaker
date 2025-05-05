@@ -1,6 +1,6 @@
 defmodule LabelmakerWeb.Constants do
   @defaults %{
-    "label" => "Labelmaker",
+    "label" => "64 character maximum",
     "font" => "Helvetica",
     "color" => "black",
     "size" => "24"
@@ -22,16 +22,19 @@ defmodule LabelmakerWeb.Constants do
          |> Enum.reject(&String.starts_with?(&1, "  Font: ."))
          |> Enum.map(&String.trim_leading(&1, "  Font: "))
 
+  @max_label_length 64
+
   @sizes 8..72
          |> Enum.to_list()
          |> Enum.take_every(4)
          |> Enum.map(&Integer.to_string/1)
 
-  def defaults, do: @defaults
-  def permitted_keys, do: @permitted_keys
   def colors, do: @colors
   def color_count, do: @colors |> length()
+  def defaults, do: @defaults
   def fonts, do: @fonts
   def font_count, do: @fonts |> length()
+  def max_label_length, do: @max_label_length
+  def permitted_keys, do: @permitted_keys
   def sizes, do: @sizes
 end
