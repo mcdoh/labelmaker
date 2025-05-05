@@ -24,7 +24,8 @@ defmodule LabelmakerWeb.Router do
     pipe_through :browser
 
     live "/", Home
-    live "/:label", Label
+    get "/:label", LabelController, :show
+    # live "/:label", Label
   end
 
   # Other scopes may use custom stacks.
