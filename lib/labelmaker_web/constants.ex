@@ -1,12 +1,12 @@
 defmodule LabelmakerWeb.Constants do
   @defaults %{
-    "label" => "64 character maximum",
-    "font" => "Helvetica",
-    "color" => "black",
-    "size" => "24"
+    label: "64 character maximum",
+    font: "Helvetica",
+    color: "black",
+    size: "24"
   }
 
-  @permitted_keys Map.keys(@defaults)
+  @permitted_keys @defaults |> Map.keys() |> Enum.map(&Atom.to_string/1)
 
   @colors System.cmd("magick", ["-list", "color"])
           |> elem(0)

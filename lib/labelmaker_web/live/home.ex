@@ -1,29 +1,24 @@
 defmodule LabelmakerWeb.Home do
   use LabelmakerWeb, :live_view
   alias LabelmakerWeb.Constants
+  alias LabelmakerWeb.Tools
 
   def mount(_params, _session, socket) do
-    {:ok,
-     assign(socket,
-       label: "",
-       font: "Helvetica",
-       color: "black",
-       size: "24"
-     )}
+    {
+      :ok,
+      assign(
+        socket,
+        Enum.to_list(Constants.defaults())
+      )
+    }
   end
 
   def handle_event("update_label", params, socket) do
-    {:noreply,
-     assign(socket,
-       label: params["label"] || "",
-       font: params["font"] || "Helvetica",
-       color: params["color"] || "black",
-       size: params["size"] || "24"
-     )}
+    {:noreply, assign(socket, Tools.process_parameters(params))}
   end
 
   def handle_event("make_label", params, socket) do
-    {:noreply, push_navigate(socket, to: ~p"/#{params["label"]}?#{Map.drop(params, ["label"])}")}
+    {:noreply, redirect(socket, to: ~p"/#{params["label"]}?#{Map.drop(params, ["label"])}")}
   end
 
   def render(assigns) do

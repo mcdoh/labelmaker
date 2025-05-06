@@ -1,28 +1,12 @@
 defmodule LabelmakerWeb.LabelController do
   use LabelmakerWeb, :controller
-  alias LabelmakerWeb.Constants
+  alias LabelmakerWeb.Tools
 
   @label_dir Path.join(:code.priv_dir(:labelmaker), "static/labels")
   File.mkdir_p!(@label_dir)
 
   def show(conn, params) do
-    params =
-      params
-      |> Map.take(Constants.permitted_keys())
-      |> Enum.filter(fn {k, v} ->
-        case k do
-          "color" -> v in Constants.colors()
-          "font" -> v in Constants.fonts()
-          "label" -> String.length(v) <= Constants.max_label_length()
-          "size" -> v in Constants.sizes()
-          _ -> true
-        end
-      end)
-      |> Map.new()
-
-    options =
-      Constants.defaults()
-      |> Map.merge(params)
+    options = Tools.process_parameters(params)
 
     filename =
       options
@@ -47,15 +31,15 @@ defmodule LabelmakerWeb.LabelController do
       "-background",
       "none",
       "-fill",
-      options["color"],
+      options.color,
       "-pointsize",
-      options["size"],
+      options.size,
       "-font",
-      options["font"],
-      "label:#{options["label"]}",
+      options.font,
+      "label:#{options.label}",
       "-set",
       "comment",
-      inspect(options),
+      inspect(Jason.encode!(options)),
       filepath
     ]
 
