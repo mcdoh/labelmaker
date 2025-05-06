@@ -43,6 +43,18 @@ defmodule LabelmakerWeb.LabelController do
       filepath
     ]
 
+    args =
+      if options.outline != "none" do
+        [
+          "-stroke",
+          options.outline,
+          "-strokewidth",
+          "1"
+        ] ++ args
+      else
+        args
+      end
+
     {_, 0} = System.cmd("magick", args)
   end
 end

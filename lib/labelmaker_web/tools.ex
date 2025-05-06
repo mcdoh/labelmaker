@@ -11,6 +11,7 @@ defmodule LabelmakerWeb.Tools do
           :color -> v in Constants.colors()
           :font -> v in Constants.fonts()
           :label -> String.length(v) <= Constants.max_label_length()
+          :outline -> v in Constants.outlines()
           :size -> v in Constants.sizes()
           _ -> true
         end

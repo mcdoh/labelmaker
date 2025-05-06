@@ -8,7 +8,7 @@ defmodule LabelmakerWeb.Home do
       :ok,
       assign(
         socket,
-        Enum.to_list(Constants.defaults())
+        Enum.to_list(%{Constants.defaults() | label: ""})
       )
     }
   end
@@ -40,6 +40,11 @@ defmodule LabelmakerWeb.Home do
         <select name="color" value={@color}>
           <%= for color <- Constants.colors() do %>
             <option value={color} selected={@color == color}>{color}</option>
+          <% end %>
+        </select>
+        <select name="outline" value={@outline}>
+          <%= for outline <- Constants.outlines() do %>
+            <option value={outline} selected={@outline == outline}>{outline}</option>
           <% end %>
         </select>
         <select name="size" value={@size}>

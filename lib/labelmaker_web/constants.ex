@@ -3,6 +3,7 @@ defmodule LabelmakerWeb.Constants do
     label: "64 character maximum",
     font: "Helvetica",
     color: "black",
+    outline: "none",
     size: "24"
   }
 
@@ -24,6 +25,8 @@ defmodule LabelmakerWeb.Constants do
 
   @max_label_length 64
 
+  @outlines ~w(none white black gray)
+
   @sizes 8..72
          |> Enum.to_list()
          |> Enum.take_every(4)
@@ -35,6 +38,7 @@ defmodule LabelmakerWeb.Constants do
   def fonts, do: @fonts
   def font_count, do: @fonts |> length()
   def max_label_length, do: @max_label_length
+  def outlines, do: @outlines
   def permitted_keys, do: @permitted_keys
   def sizes, do: @sizes
 end
