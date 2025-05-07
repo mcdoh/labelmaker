@@ -12,29 +12,18 @@ module.exports = {
 		extend: {
 			colors: {
 				primary: '#6495ED', // cornflowerblue
+				highlight: '#74A0EF',
 				bg: {
-					light: '#F0F8FF', // aliceblue
-					dark: '#1C1F26', // near black
+					light: '#D1DFFA',
+					dark: '#1E2D47',
 				},
 				fg: {
-					light: '#222222',
-					dark: '#E0E6ED',
+					light: '#1E2D47',
+					dark: '#D1DFFA',
 				},
 				secondary: {
-					light: '#B0C4DE',
-					dark: '#3A4A5E',
-				},
-				accent: {
-					light: '#7B68EE',
-					dark: '#9CAEFF',
-				},
-				danger: {
-					light: '#F08080',
-					dark: '#FF6B6B',
-				},
-				success: {
-					light: '#3CB371',
-					dark: '#4CAF50',
+					light: '#64D9ED',
+					dark: '#324B77',
 				},
 			},
 		},
