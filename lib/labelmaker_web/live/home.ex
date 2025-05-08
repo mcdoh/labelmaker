@@ -4,17 +4,29 @@ defmodule LabelmakerWeb.Home do
   alias LabelmakerWeb.Tools
 
   def mount(_params, _session, socket) do
+    assigns =
+      Constants.defaults()
+      |> Map.replace(:label, "")
+      |> Map.merge(Constants.preview())
+      |> Enum.to_list()
+
     {
       :ok,
       assign(
         socket,
-        Enum.to_list(%{Constants.defaults() | label: ""})
+        assigns
       )
     }
   end
 
   def handle_event("update_label", params, socket) do
-    {:noreply, assign(socket, Tools.process_parameters(params))}
+    assigns =
+      params
+      |> Map.merge(Constants.stringview())
+      |> Tools.process_parameters()
+      |> Enum.to_list()
+
+    {:noreply, assign(socket, assigns)}
   end
 
   def handle_event("make_label", params, socket) do
@@ -26,14 +38,17 @@ defmodule LabelmakerWeb.Home do
     <div class="max-w-xl mx-auto p-4 space-y-6">
       <h1 class="text-2xl font-bold text-center">Labelmaker</h1>
 
-      <form phx-change="update_label" phx-submit="make_label" class="space-y-4">
-        <div
-          class="flex justify-center items-center h-[72px] bg-gradient-to-r from-black to-white border rounded border-primary"
-          style={"color: #{@color}; font-family: #{@font}; font-size: #{@size}px;"}
-        >
-          {@label}
-        </div>
+      <div
+        class={[
+          "flex justify-center items-center p-4 overflow-hidden whitespace-nowrap bg-gradient-to-r from-black to-white border rounded border-primary",
+          @outline != "none" && "outline-#{@outline}"
+        ]}
+        style={"height: calc(2rem + #{@preview_height}px); color: #{@color}; font-family: #{@font}; font-size: #{@size}px; line-height: #{@size}px;"}
+      >
+        {Enum.join(@preview_text, "<br />")}
+      </div>
 
+      <form phx-change="update_label" phx-submit="make_label" class="space-y-4">
         <div>
           <label for="label" class="block text-sm font-medium">Label</label>
           <input

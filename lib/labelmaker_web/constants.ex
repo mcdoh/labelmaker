@@ -7,7 +7,19 @@ defmodule LabelmakerWeb.Constants do
     size: "24"
   }
 
-  @permitted_keys @defaults |> Map.keys() |> Enum.map(&Atom.to_string/1)
+  @preview %{
+    preview_height: @defaults.size,
+    preview_text: []
+  }
+
+  @stringview @preview
+              |> Enum.map(fn {k, v} -> {Atom.to_string(k), v} end)
+              |> Map.new()
+
+  @permitted_keys @defaults
+                  |> Map.merge(@preview)
+                  |> Map.keys()
+                  |> Enum.map(&Atom.to_string/1)
 
   @colors System.cmd("magick", ["-list", "color"])
           |> elem(0)
@@ -40,5 +52,7 @@ defmodule LabelmakerWeb.Constants do
   def max_label_length, do: @max_label_length
   def outlines, do: @outlines
   def permitted_keys, do: @permitted_keys
+  def preview, do: @preview
   def sizes, do: @sizes
+  def stringview, do: @stringview
 end

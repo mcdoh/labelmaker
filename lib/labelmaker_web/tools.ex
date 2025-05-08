@@ -2,19 +2,26 @@ defmodule LabelmakerWeb.Tools do
   alias LabelmakerWeb.Constants
 
   def process_parameters(parameters) do
+    %{"label" => label, "size" => size} = parameters
+    line_breaks = Regex.scan(~r/#{Regex.escape("\\n")}/, label) |> length()
+    size = String.to_integer(size)
+
     parameters =
       parameters
       |> Map.take(Constants.permitted_keys())
       |> Map.new(fn {k, v} -> {String.to_atom(k), v} end)
-      |> Enum.filter(fn {k, v} ->
-        case k do
-          :color -> v in Constants.colors()
-          :font -> v in Constants.fonts()
-          :label -> String.length(v) <= Constants.max_label_length()
-          :outline -> v in Constants.outlines()
-          :size -> v in Constants.sizes()
-          _ -> true
-        end
+      |> Enum.map(fn
+        {:preview_height, _} -> {:preview_height, size + size * line_breaks}
+        {:preview_text, _} -> {:preview_text, String.split(label, "\n")}
+        pair -> pair
+      end)
+      |> Enum.filter(fn
+        {:color, color} -> color in Constants.colors()
+        {:font, font} -> font in Constants.fonts()
+        {:label, label} -> String.length(label) <= Constants.max_label_length()
+        {:outline, outline} -> outline in Constants.outlines()
+        {:size, size} -> size in Constants.sizes()
+        _ -> true
       end)
       |> Map.new()
 
