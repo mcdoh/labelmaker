@@ -12,7 +12,7 @@ defmodule LabelmakerWeb.Tools do
       |> Map.new(fn {k, v} -> {String.to_atom(k), v} end)
       |> Enum.map(fn
         {:preview_height, _} -> {:preview_height, size + size * line_breaks}
-        {:preview_text, _} -> {:preview_text, String.split(label, "\n")}
+        {:preview_text, _} -> {:preview_text, String.split(label, "\\n")}
         pair -> pair
       end)
       |> Enum.filter(fn

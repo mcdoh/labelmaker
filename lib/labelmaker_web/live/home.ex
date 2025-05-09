@@ -45,7 +45,10 @@ defmodule LabelmakerWeb.Home do
         ]}
         style={"height: calc(2rem + #{@preview_height}px); color: #{@color}; font-family: #{@font}; font-size: #{@size}px; line-height: #{@size}px;"}
       >
-        {Enum.join(@preview_text, "<br />")}
+        <%= for {str, i} <- Enum.with_index(@preview_text) do %>
+          {str}
+          {if i < length(@preview_text) - 1, do: raw("<br />")}
+        <% end %>
       </div>
 
       <form phx-change="update_label" phx-submit="make_label" class="space-y-4">
