@@ -42,7 +42,7 @@ defmodule LabelmakerWeb.Home do
       <div
         class={
           "flex justify-center items-center p-4 overflow-hidden whitespace-nowrap bg-gradient-to-r from-black to-white border rounded transition duration-300 #{if label_too_long, do: "border-danger", else: "border-primary"} #{if label_too_long, do: "outline-danger", else: @outline != "none" && "outline-#{@outline}"}"}
-        style={"height: calc(2rem + #{@preview_height}px); color: #{@color}; font-family: #{@font}; font-size: #{@size}px; line-height: #{@size}px;"}
+        style={"height: calc(2rem + #{@preview_height}px); color: #{if label_too_long, do: "white", else: @color}; font-family: #{@font}; font-size: #{@size}px; line-height: #{@size}px;"}
       >
         <%= if label_too_long do %>
           {Constants.max_label_error()}
