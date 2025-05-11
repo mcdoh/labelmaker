@@ -1,5 +1,6 @@
 defmodule LabelmakerWeb.LabelController do
   use LabelmakerWeb, :controller
+  alias LabelmakerWeb.Constants
   alias LabelmakerWeb.Tools
 
   @label_dir Path.join(:code.priv_dir(:labelmaker), "static/labels")
@@ -36,7 +37,7 @@ defmodule LabelmakerWeb.LabelController do
       options.size,
       "-font",
       options.font,
-      "label:#{options.label}",
+      "label:#{String.slice(options.label, 0, Constants.max_label_length())}",
       "-set",
       "comment",
       inspect(Jason.encode!(options)),

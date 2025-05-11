@@ -13,6 +13,7 @@ module.exports = {
 			colors: {
 				primary: '#6495ED', // cornflowerblue
 				highlight: '#74A0EF',
+				danger: '#FF6B6B',
 				bg: {
 					light: '#D1DFFA',
 					dark: '#1E2D47',

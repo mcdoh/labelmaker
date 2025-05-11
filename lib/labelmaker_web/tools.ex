@@ -13,7 +13,7 @@ defmodule LabelmakerWeb.Tools do
       |> Enum.map(fn
         {:label, label} ->
           if String.length(label) > Constants.max_label_length(),
-            do: {:label, String.slice(label, 0, Constants.max_label_length())},
+            do: {:label, String.slice(label, 0, Constants.max_label_length() + 1)},
             else: {:label, label}
 
         {:preview_height, _} ->
