@@ -1,10 +1,10 @@
 defmodule LabelmakerWeb.Constants do
   @defaults %{
-    label: "64 character maximum",
+    label: "",
     font: "Helvetica",
     color: "black",
-    outline: "none",
-    size: "24"
+    outline: "white",
+    size: "32"
   }
 
   @preview %{
@@ -36,6 +36,7 @@ defmodule LabelmakerWeb.Constants do
          |> Enum.map(&String.trim_leading(&1, "  Font: "))
 
   @max_label_length 64
+  @max_label_error "64-character maximum"
 
   @outlines ~w(none white black gray)
 
@@ -50,6 +51,7 @@ defmodule LabelmakerWeb.Constants do
   def fonts, do: @fonts
   def font_count, do: @fonts |> length()
   def max_label_length, do: @max_label_length
+  def max_label_error, do: @max_label_error
   def outlines, do: @outlines
   def permitted_keys, do: @permitted_keys
   def preview, do: @preview

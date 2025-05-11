@@ -6,7 +6,6 @@ defmodule LabelmakerWeb.Home do
   def mount(_params, _session, socket) do
     assigns =
       Constants.defaults()
-      |> Map.replace(:label, "")
       |> Map.merge(Constants.preview())
       |> Enum.to_list()
 
@@ -45,9 +44,13 @@ defmodule LabelmakerWeb.Home do
         ]}
         style={"height: calc(2rem + #{@preview_height}px); color: #{@color}; font-family: #{@font}; font-size: #{@size}px; line-height: #{@size}px;"}
       >
-        <%= for {str, i} <- Enum.with_index(@preview_text) do %>
-          {str}
-          {if i < length(@preview_text) - 1, do: raw("<br />")}
+        <%= if String.length(@label) > Constants.max_label_length() do %>
+          {Constants.max_label_error()}
+        <% else %>
+          <%= for {str, i} <- Enum.with_index(@preview_text) do %>
+            {str}
+            {if i < length(@preview_text) - 1, do: raw("<br />")}
+          <% end %>
         <% end %>
       </div>
 
