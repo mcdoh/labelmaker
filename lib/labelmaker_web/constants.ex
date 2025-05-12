@@ -27,6 +27,9 @@ defmodule LabelmakerWeb.Constants do
           # drop header stuff
           |> Enum.drop(5)
           |> Enum.map(fn color_info -> color_info |> String.split() |> List.first() end)
+          |> Enum.reject(&is_nil/1)
+          # filter out colors that end in a number (no CSS equivalent)
+          |> Enum.reject(fn color -> String.match?(color, ~r/\d+$/) end)
 
   @fonts System.cmd("magick", ["-list", "font"])
          |> elem(0)
