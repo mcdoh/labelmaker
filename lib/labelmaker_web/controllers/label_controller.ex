@@ -4,7 +4,6 @@ defmodule LabelmakerWeb.LabelController do
   alias LabelmakerWeb.Tools
 
   @label_dir Path.join(:code.priv_dir(:labelmaker), "static/labels")
-  File.mkdir_p!(@label_dir)
 
   def show(conn, params) do
     options = Tools.process_parameters(params)
@@ -28,6 +27,8 @@ defmodule LabelmakerWeb.LabelController do
   end
 
   defp generate_image(options, filepath) do
+    File.mkdir_p!(@label_dir)
+
     args = [
       "-background",
       "none",
