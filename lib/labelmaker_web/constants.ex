@@ -8,13 +8,10 @@ defmodule LabelmakerWeb.Constants do
   }
 
   @preview %{
+    preview_bg: "r",
     preview_height: @defaults.size,
     preview_text: []
   }
-
-  @stringview @preview
-              |> Enum.map(fn {k, v} -> {Atom.to_string(k), v} end)
-              |> Map.new()
 
   @permitted_keys @defaults
                   |> Map.merge(@preview)
@@ -30,6 +27,7 @@ defmodule LabelmakerWeb.Constants do
           |> Enum.reject(&is_nil/1)
           # filter out colors that end in a number (no CSS equivalent)
           |> Enum.reject(fn color -> String.match?(color, ~r/\d+$/) end)
+          |> Enum.uniq()
 
   @fonts System.cmd("magick", ["-list", "font"])
          |> elem(0)
@@ -59,5 +57,4 @@ defmodule LabelmakerWeb.Constants do
   def permitted_keys, do: @permitted_keys
   def preview, do: @preview
   def sizes, do: @sizes
-  def stringview, do: @stringview
 end

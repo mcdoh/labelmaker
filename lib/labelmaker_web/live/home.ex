@@ -18,10 +18,16 @@ defmodule LabelmakerWeb.Home do
     }
   end
 
+  def handle_event("update_preview", %{"bg" => bg}, socket) do
+    {:noreply, assign(socket, :preview_bg, bg)}
+  end
+
   def handle_event("update_label", params, socket) do
     assigns =
-      params
-      |> Map.merge(Constants.stringview())
+      socket.assigns
+      |> Enum.map(fn {k, v} -> {Atom.to_string(k), v} end)
+      |> Map.new()
+      |> Map.merge(params)
       |> Tools.process_parameters()
       |> Enum.to_list()
 
@@ -40,14 +46,22 @@ defmodule LabelmakerWeb.Home do
         String.length(assigns.label) > Constants.max_label_length()
       )
 
+    preview_background =
+      case assigns.preview_bg do
+        "r" -> "bg-[linear-gradient(to_right,_black_25%,_white_75%)]"
+        "b" -> "bg-[linear-gradient(to_bottom,_black_25%,_white_75%)]"
+        "c" -> "bg-[#{assigns.color}]"
+        _ -> "bg-[linear-gradient(to_right,_black_25%,_white_75%)]"
+      end
+
     ~H"""
     <div class="max-w-xl mx-auto p-4 space-y-6">
       <h1 class="text-2xl font-bold text-center">Labelmaker</h1>
 
       <div
         class={
-          "flex justify-center items-center p-4 overflow-hidden whitespace-nowrap bg-gradient-to-r from-black to-white border rounded transition duration-300 #{if @label_too_long, do: "border-danger", else: "border-primary"} #{if @label_too_long, do: "outline-danger", else: @outline != "none" && "outline-#{@outline}"}"}
-        style={"height: calc(2rem + #{@preview_height}px); color: #{if @label_too_long, do: "white", else: @color}; font-family: #{@font}; font-size: #{@size}px; line-height: #{@size}px;"}
+          "flex justify-center items-center p-4 overflow-hidden whitespace-nowrap border rounded transition duration-300 #{preview_background} #{if @label_too_long, do: "border-danger", else: "border-primary"} #{if @label_too_long, do: "outline-danger", else: @outline != "none" && "outline-#{@outline}"}"}
+        style={"height: calc(2rem + #{@preview_height}px); color: #{if @label_too_long, do: "white", else: @color}; font-family: #{@font}; font-size: #{@size}px; line-height: #{@size}px; background-color: #{if @preview_bg == "c", do: @color, else: ""}"}
       >
         <%= if @label_too_long do %>
           {Constants.max_label_error()}
@@ -57,6 +71,32 @@ defmodule LabelmakerWeb.Home do
             {if i < length(@preview_text) - 1, do: raw("<br />")}
           <% end %>
         <% end %>
+      </div>
+      <div class="flex flex-row justify-between" style="margin-top: 5px;">
+        <p class="text-xs text-gray-600 dark:text-gray-400 m-0 ml-1">
+          Note: not all fonts are available for preview.
+        </p>
+        <div class="flex flex-row gap-1">
+          <div
+            phx-click="update_preview"
+            phx-value-bg="r"
+            class="w-[12px] h-[12px] bg-gradient-to-r from-black to-white cursor-pointer"
+          >
+          </div>
+          <div
+            phx-click="update_preview"
+            phx-value-bg="b"
+            class="w-[12px] h-[12px] bg-gradient-to-b from-black to-white cursor-pointer"
+          >
+          </div>
+          <div
+            phx-click="update_preview"
+            phx-value-bg="c"
+            class="w-[12px] h-[12px] cursor-pointer"
+            style={"background-color: #{@color}"}
+          >
+          </div>
+        </div>
       </div>
 
       <form phx-change="update_label" phx-submit="make_label" class="space-y-4">
