@@ -1,8 +1,16 @@
 defmodule LabelmakerWeb.Tools do
+  # for the ~p sigil
+  use Phoenix.VerifiedRoutes,
+    endpoint: LabelmakerWeb.Endpoint,
+    router: LabelmakerWeb.Router,
+    statics: LabelmakerWeb.static_paths()
+
   alias LabelmakerWeb.Constants
 
   def process_parameters(parameters) do
     %{"label" => label, "size" => size} = parameters
+
+    link = ~p"/#{label}?#{Map.take(parameters, ["color", "font", "outline", "size"])}"
     line_breaks = Regex.scan(~r/#{Regex.escape("\\n")}/, label) |> length()
     size = String.to_integer(size)
 
@@ -15,6 +23,9 @@ defmodule LabelmakerWeb.Tools do
           if String.length(label) > Constants.max_label_length(),
             do: {:label, String.slice(label, 0, Constants.max_label_length() + 1)},
             else: {:label, label}
+
+        {:link, _} ->
+          {:link, link}
 
         {:preview_height, _} ->
           {:preview_height, size + size * line_breaks}

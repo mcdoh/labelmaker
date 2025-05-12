@@ -1,6 +1,7 @@
 defmodule LabelmakerWeb.Constants do
   @defaults %{
     label: "",
+    link: "",
     font: "Helvetica",
     color: "black",
     outline: "white",

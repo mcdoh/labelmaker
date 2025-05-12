@@ -39,13 +39,6 @@ defmodule LabelmakerWeb.Home do
   end
 
   def render(assigns) do
-    assigns =
-      assign(
-        assigns,
-        :label_too_long,
-        String.length(assigns.label) > Constants.max_label_length()
-      )
-
     preview_background =
       case assigns.preview_bg do
         "r" -> "bg-[linear-gradient(to_right,_black_33%,_white_67%)]"
@@ -54,13 +47,20 @@ defmodule LabelmakerWeb.Home do
         _ -> "bg-[linear-gradient(to_right,_black_33%,_white_67%)]"
       end
 
+    assigns =
+      assign(
+        assigns,
+        label_too_long: String.length(assigns.label) > Constants.max_label_length(),
+        preview_background: preview_background
+      )
+
     ~H"""
     <div class="max-w-xl mx-auto p-4 space-y-6">
       <h1 class="text-2xl font-bold text-center">Labelmaker</h1>
 
       <div
         class={
-          "flex justify-center items-center p-4 overflow-hidden whitespace-nowrap border rounded transition duration-300 #{preview_background} #{if @label_too_long, do: "border-danger", else: "border-primary"} #{if @label_too_long, do: "outline-danger", else: @outline != "none" && "outline-#{@outline}"}"}
+          "flex justify-center items-center p-4 overflow-hidden whitespace-nowrap border rounded transition duration-300 #{@preview_background} #{if @label_too_long, do: "border-danger", else: "border-primary"} #{if @label_too_long, do: "outline-danger", else: @outline != "none" && "outline-#{@outline}"}"}
         style={"height: calc(2rem + #{@preview_height}px); color: #{if @label_too_long, do: "white", else: @color}; font-family: #{@font}; font-size: #{@size}px; line-height: #{@size}px; background-color: #{if @preview_bg == "c", do: @color, else: ""}"}
       >
         <%= if @label_too_long do %>
@@ -169,16 +169,15 @@ defmodule LabelmakerWeb.Home do
             </select>
           </div>
         </div>
+      </form>
 
-        <div class="text-center">
-          <button
-            type="submit"
-            class="inline-block bg-primary text-fg-light dark:text-fg-dark px-4 py-2 rounded hover:bg-highlight focus:ring-fg-light focus:dark:ring-fg-dark"
-          >
+      <div class="text-center">
+        <a href={@link}>
+          <button class="inline-block bg-primary text-fg-light dark:text-fg-dark px-4 py-2 rounded hover:bg-highlight focus:ring-fg-light focus:dark:ring-fg-dark">
             Create
           </button>
-        </div>
-      </form>
+        </a>
+      </div>
     </div>
     """
   end
