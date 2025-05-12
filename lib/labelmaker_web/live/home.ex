@@ -48,10 +48,10 @@ defmodule LabelmakerWeb.Home do
 
     preview_background =
       case assigns.preview_bg do
-        "r" -> "bg-[linear-gradient(to_right,_black_25%,_white_75%)]"
-        "b" -> "bg-[linear-gradient(to_bottom,_black_25%,_white_75%)]"
+        "r" -> "bg-[linear-gradient(to_right,_black_33%,_white_67%)]"
+        "b" -> "bg-[linear-gradient(to_bottom,_black_33%,_white_67%)]"
         "c" -> "bg-[#{assigns.color}]"
-        _ -> "bg-[linear-gradient(to_right,_black_25%,_white_75%)]"
+        _ -> "bg-[linear-gradient(to_right,_black_33%,_white_67%)]"
       end
 
     ~H"""
@@ -103,6 +103,7 @@ defmodule LabelmakerWeb.Home do
         <div>
           <label for="label" class="block text-sm font-medium">Label</label>
           <input
+            phx-hook="EnterToNewline"
             type="text"
             id="label"
             name="label"
@@ -110,6 +111,9 @@ defmodule LabelmakerWeb.Home do
             placeholder="Enter text"
             class={"mt-1 block w-full rounded border border-gray-300 px-3 py-2 text-fg-light dark:text-fg-dark dark:border-gray-600 focus:ring-primary dark:placeholder-gray-400/50 transition duration-300 #{if @label_too_long, do: "bg-danger", else: "bg-secondary-light dark:bg-secondary-dark"}"}
           />
+          <p class="text-xs text-gray-600 dark:text-gray-400 m-0 ml-1">
+            <code>\n</code> or &LT;Enter&GT; for newlines
+          </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
