@@ -74,7 +74,7 @@ defmodule LabelmakerWeb.Home do
       </div>
       <div class="flex flex-row justify-between" style="margin-top: 5px;">
         <p class="text-xs text-gray-600 dark:text-gray-400 m-0 ml-1">
-          Note: not all fonts are available for preview.
+          Note: not all fonts and colors are available for preview.
         </p>
         <div class="flex flex-row gap-1">
           <div
@@ -99,7 +99,13 @@ defmodule LabelmakerWeb.Home do
         </div>
       </div>
 
-      <form phx-change="update_label" phx-submit="make_label" class="space-y-4">
+      <form
+        id="labelmaker"
+        phx-hook="PersistData"
+        phx-change="update_label"
+        phx-submit="make_label"
+        class="space-y-4"
+      >
         <div>
           <label for="label" class="block text-sm font-medium">Label</label>
           <input
