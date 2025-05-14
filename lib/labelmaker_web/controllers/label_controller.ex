@@ -41,7 +41,7 @@ defmodule LabelmakerWeb.LabelController do
       "label:#{String.slice(options.label, 0, Constants.max_label_length())}",
       "-set",
       "comment",
-      inspect(Jason.encode!(options)),
+      inspect(Jason.encode!(Map.drop(options, [:link]))),
       filepath
     ]
 
