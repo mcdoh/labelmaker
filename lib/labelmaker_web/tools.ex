@@ -8,7 +8,10 @@ defmodule LabelmakerWeb.Tools do
   alias LabelmakerWeb.Constants
 
   def process_parameters(parameters) do
-    %{"label" => label, "size" => size} = parameters
+    %{"label" => label, "size" => size} =
+      Constants.defaults()
+      |> Map.new(fn {k, v} -> {Atom.to_string(k), v} end)
+      |> Map.merge(parameters)
 
     link = ~p"/#{label}?#{Map.take(parameters, ["color", "font", "outline", "size"])}"
     line_breaks = Regex.scan(~r/#{Regex.escape("\\n")}/, label) |> length()
