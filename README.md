@@ -1,18 +1,71 @@
 # Labelmaker
 
-To start your Phoenix server:
+**Labelmaker** is a simple web tool for generating text-based images, perfect for creating decals in [Tabletop Simulator](https://www.tabletopsimulator.com/). Just append your desired text to the URL and Labelmaker will return an image—no design tools required.
 
-  * Run `mix setup` to install and setup dependencies
-  * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
+## ✨ Features
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+- 📦 Instant text-to-image conversion via URL
+- 🎨 Customizable `color`, `outline`, `font`, and `size` via query string
+- 🧩 Designed for ease of use with Tabletop Simulator
+- 🧭 Interactive homepage to preview available options
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+## 🚀 Usage
 
-## Learn more
+### Basic Label
 
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+https://labelmaker.xyz/Hello World
+Generates an image of "Hello World" in the default style.
+
+### Set Text Color
+
+https://labelmaker.xyz/Hello?color=yellow
+Renders "Hello" in yellow text.
+
+### Add Outline
+
+https://labelmaker.xyz/Hello?color=yellow&outline=black
+Renders "Hello" in yellow with a black outline—perfect for contrast on similar backgrounds.
+
+### Customize Font and Size
+
+https://labelmaker.xyz/Hello?font=Courier&size=48
+Uses the `Courier` font at 48px size.
+
+## ⚙️ Query Parameters
+
+| Parameter | Description         | Example Value           |
+| --------- | ------------------- | ----------------------- |
+| `color`   | Text color          | `red`, `CornFlowerBlue` |
+| `outline` | Outline color       | `black`, `white`        |
+| `font`    | Font name           | `Courier`, `Helvetica`  |
+| `size`    | Font size in pixels | `24`, `48`              |
+
+## 🧪 Try It Live
+
+Visit the [Labelmaker homepage](https://labelmaker.xyz/) to:
+
+- Preview fonts and colors
+- Test out combinations
+- Copy generated URLs for use in Tabletop Simulator or elsewhere
+
+## 🧰 Development
+
+This project is powered by Elixir + Phoenix, employs ImageMagick to create the images, and uses Docker for deployment.
+
+### Build & Run Locally
+
+```sh
+mix setup
+mix phx.server
+```
+
+Or use Docker:
+
+```sh
+docker build -t labelmaker .
+docker run -p 4000:4000 labelmaker
+```
+
+```
+
+```
