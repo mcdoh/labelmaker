@@ -1,6 +1,6 @@
 # Labelmaker
 
-**Labelmaker** is a simple web tool for generating text-based images, perfect for creating decals in [Tabletop Simulator](https://www.tabletopsimulator.com/). Just append your desired text to the URL and Labelmaker will return an image—no design tools required.
+[Labelmaker](https://labelmaker.xyz) is a simple web tool for generating text-based images, perfect for creating decals in [Tabletop Simulator](https://www.tabletopsimulator.com/). Just append your desired text to the URL and Labelmaker will return an image, no design tools required.
 
 ## ✨ Features
 
@@ -14,22 +14,34 @@
 ### Basic Label
 
 https://labelmaker.xyz/Hello World
+
 Generates an image of "Hello World" in the default style.
+
+![Hello World](https://labelmaker.xyz/Hello World)
 
 ### Set Text Color
 
 https://labelmaker.xyz/Hello?color=yellow
+
 Renders "Hello" in yellow text.
+
+![Yellow Hello](https://labelmaker.xyz/Hello?color=yellow)
 
 ### Add Outline
 
 https://labelmaker.xyz/Hello?color=yellow&outline=black
-Renders "Hello" in yellow with a black outline—perfect for contrast on similar backgrounds.
+
+Renders "Hello" in yellow with a black outline, perfect for contrast on similar backgrounds.
+
+![Outlined yellow Hello](https://labelmaker.xyz/Hello?color=yellow&outline=black)
 
 ### Customize Font and Size
 
-https://labelmaker.xyz/Hello?font=Courier&size=48
-Uses the `Courier` font at 48px size.
+https://labelmaker.xyz/Courier?font=Courier&size=72&color=CornFlowerBlue&outline=white
+
+Uses the `Courier` font at 72px size.
+
+![CornFlowerBlue Courier](https://labelmaker.xyz/Courier?font=Courier&size=72&color=CornFlowerBlue&outline=white)
 
 ## ⚙️ Query Parameters
 
