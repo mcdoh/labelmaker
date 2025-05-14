@@ -86,8 +86,10 @@ ENV LC_ALL=en_US.UTF-8
 
 WORKDIR "/app"
 
+# configure the directory for generated images
+# probably need some better permissions here
 RUN mkdir -p /app/_build/prod/lib/labelmaker/priv/static/labels
-RUN chmod -R 775 /app/_build/prod/lib/labelmaker/priv/static/labels
+RUN chmod -R 777 /app/_build/prod/lib/labelmaker/priv/static/labels
 
 RUN chown nobody /app
 
