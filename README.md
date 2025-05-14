@@ -13,15 +13,15 @@
 
 ### Basic Label
 
-https://labelmaker.xyz/Hello World
+[https://labelmaker.xyz/Hello World](https://labelmaker.xyz/Hello%20World)
 
 Generates an image of "Hello World" in the default style.
 
-![Hello World](https://labelmaker.xyz/Hello World)
+![Hello World](https://labelmaker.xyz/Hello%20World?outline=white)
 
 ### Set Text Color
 
-https://labelmaker.xyz/Hello?color=yellow
+[https://labelmaker.xyz/Hello?color=yellow](https://labelmaker.xyz/Hello?color=yellow)
 
 Renders "Hello" in yellow text.
 
@@ -29,7 +29,7 @@ Renders "Hello" in yellow text.
 
 ### Add Outline
 
-https://labelmaker.xyz/Hello?color=yellow&outline=black
+[https://labelmaker.xyz/Hello?color=yellow&outline=black](https://labelmaker.xyz/Hello?color=yellow&outline=black)
 
 Renders "Hello" in yellow with a black outline, perfect for contrast on similar backgrounds.
 
@@ -37,11 +37,19 @@ Renders "Hello" in yellow with a black outline, perfect for contrast on similar 
 
 ### Customize Font and Size
 
-https://labelmaker.xyz/Courier?font=Courier&size=72&color=CornFlowerBlue&outline=white
+[https://labelmaker.xyz/Courier?font=Courier&size=96&color=CornFlowerBlue&outline=white](https://labelmaker.xyz/Courier?font=Courier&size=96&color=CornFlowerBlue&outline=white)
 
-Uses the `Courier` font at 72px size.
+Uses the `Courier` font at 96px size.
 
-![CornFlowerBlue Courier](https://labelmaker.xyz/Courier?font=Courier&size=72&color=CornFlowerBlue&outline=white)
+![CornflowerBlue Courier](https://labelmaker.xyz/Courier?font=Courier&size=72&color=CornflowerBlue&outline=white)
+
+### Multiple Lines
+
+[https://labelmaker.xyz/Multiple\nLines?font=DejaVu-Sans-Oblique&color=orange](https://labelmaker.xyz/Multiple\nLines?font=DejaVu-Sans-Oblique&color=orange)
+
+Use `\n` to insert line breaks.
+
+![Multiple\nLines](https://labelmaker.xyz/Multiple\nLines?font=DejaVu-Sans-Oblique&size=72&color=orange)
 
 ## ⚙️ Query Parameters
 
