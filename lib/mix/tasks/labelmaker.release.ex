@@ -9,8 +9,8 @@ defmodule Mix.Tasks.Labelmaker.Release do
     args = [
       "buildx",
       "build",
-      "--platform",
-      "linux/amd64",
+      "--network=host",
+      "--no-cache",
       "-t",
       "192.168.0.2:5000/labelmaker",
       "--push",
