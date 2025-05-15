@@ -21,7 +21,7 @@ ARG RUNNER_IMAGE="debian:${DEBIAN_VERSION}"
 FROM ${BUILDER_IMAGE} AS builder
 
 # install build dependencies
-RUN apt-get update -y && apt-get install -y build-essential git imagemagick fonts-dejavu fonts-liberation fonts-freefont-ttf \
+RUN apt-get update -y && apt-get install -y build-essential git imagemagick ttf-mscorefonts-installer \
     && apt-get clean && rm -f /var/lib/apt/lists/*_*
 
 # Debian version still uses 'convert'
@@ -71,7 +71,7 @@ RUN mix release
 FROM ${RUNNER_IMAGE}
 
 RUN apt-get update -y && \
-  apt-get install -y libstdc++6 openssl libncurses5 locales ca-certificates imagemagick fonts-dejavu fonts-liberation fonts-freefont-ttf \
+  apt-get install -y libstdc++6 openssl libncurses5 locales ca-certificates imagemagick ttf-mscorefonts-installer \
   && apt-get clean && rm -f /var/lib/apt/lists/*_*
 
 # Debian version still uses 'convert'
@@ -86,8 +86,10 @@ ENV LC_ALL=en_US.UTF-8
 
 WORKDIR "/app"
 
+# configure the directory for generated images
+# probably need some better permissions here
 RUN mkdir -p /app/_build/prod/lib/labelmaker/priv/static/labels
-RUN chmod -R 775 /app/_build/prod/lib/labelmaker/priv/static/labels
+RUN chmod -R 777 /app/_build/prod/lib/labelmaker/priv/static/labels
 
 RUN chown nobody /app
 

@@ -4,8 +4,8 @@ defmodule LabelmakerWeb.Constants do
     link: "",
     font: "Helvetica",
     color: "black",
-    outline: "white",
-    size: "32"
+    outline: "none",
+    size: "72"
   }
 
   @preview %{
@@ -42,9 +42,9 @@ defmodule LabelmakerWeb.Constants do
 
   @outlines ~w(none white black gray)
 
-  @sizes 8..72
+  @sizes 16..128
          |> Enum.to_list()
-         |> Enum.take_every(4)
+         |> Enum.take_every(8)
          |> Enum.map(&Integer.to_string/1)
 
   def colors, do: @colors
