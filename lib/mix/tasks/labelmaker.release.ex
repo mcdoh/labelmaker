@@ -12,7 +12,6 @@ defmodule Mix.Tasks.Labelmaker.Release do
       "--network=host",
       "--platform",
       "linux/amd64",
-      "--no-cache",
       "-t",
       "192.168.0.2:5000/labelmaker",
       "--push",
