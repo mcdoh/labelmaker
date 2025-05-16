@@ -43,7 +43,7 @@ defmodule LabelmakerWeb.Home do
       case assigns.preview_bg do
         "r" -> "bg-[linear-gradient(to_right,_black_33%,_white_67%)]"
         "b" -> "bg-[linear-gradient(to_bottom,_black_33%,_white_67%)]"
-        "c" -> "bg-[#{assigns.color}]"
+        "c" -> ""
         _ -> "bg-[linear-gradient(to_right,_black_33%,_white_67%)]"
       end
 
@@ -61,7 +61,7 @@ defmodule LabelmakerWeb.Home do
       <div
         class={
           "flex justify-center items-center p-4 overflow-hidden whitespace-nowrap border rounded transition duration-300 #{@preview_background} #{if @label_too_long, do: "border-danger", else: "border-primary"} #{if @label_too_long, do: "outline-danger", else: @outline != "none" && "outline-#{@outline}"}"}
-        style={"height: calc(2rem + #{@preview_height}px); color: #{if @label_too_long, do: "white", else: @color}; font-family: #{@font}; font-size: #{@size}px; line-height: #{@size}px; background-color: #{if @preview_bg == "c", do: @color, else: ""}"}
+        style={"height: calc(2rem + #{@preview_height}px); color: #{if @label_too_long, do: "white", else: @color}; #{Tools.outline(@outline, @label_too_long)} font-family: #{@font}; font-size: #{@size}px; line-height: #{@size}px; background-color: #{if @preview_bg == "c", do: @color, else: ""}"}
       >
         <%= if @label_too_long do %>
           {Constants.max_label_error()}
@@ -74,7 +74,7 @@ defmodule LabelmakerWeb.Home do
       </div>
       <div class="flex flex-row justify-between" style="margin-top: 5px;">
         <p class="text-xs text-gray-600 dark:text-gray-400 m-0 ml-1">
-          Note: not all fonts and colors are available for preview.
+          Note: not all fonts are available for preview.
         </p>
         <div class="flex flex-row gap-1">
           <div

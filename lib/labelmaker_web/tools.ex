@@ -8,6 +8,7 @@ defmodule LabelmakerWeb.Tools do
   alias LabelmakerWeb.Constants
 
   def process_parameters(parameters) do
+    # ensure our defaults are in place to cover any missing parameters
     %{"label" => label, "size" => size} =
       Constants.defaults()
       |> Map.new(fn {k, v} -> {Atom.to_string(k), v} end)
@@ -22,6 +23,9 @@ defmodule LabelmakerWeb.Tools do
       |> Map.take(Constants.permitted_keys())
       |> Map.new(fn {k, v} -> {String.to_atom(k), v} end)
       |> Enum.map(fn
+        {:font, font} ->
+          {:font, Constants.font_map()[String.downcase(font)]}
+
         {:label, label} ->
           if String.length(label) > Constants.max_label_length(),
             do: {:label, String.slice(label, 0, Constants.max_label_length() + 1)},
@@ -41,7 +45,7 @@ defmodule LabelmakerWeb.Tools do
       end)
       |> Enum.filter(fn
         {:color, color} -> color in Constants.colors()
-        {:font, font} -> font in Constants.fonts()
+        {:font, font} -> font in Map.values(Constants.font_map())
         {:outline, outline} -> outline in Constants.outlines()
         {:size, size} -> size in Constants.sizes()
         _ -> true
@@ -50,4 +54,11 @@ defmodule LabelmakerWeb.Tools do
 
     Map.merge(Constants.defaults(), parameters)
   end
+
+  def outline(_, error: true), do: outline(Constants.danger(), false)
+  def outline("none", _error), do: ""
+
+  def outline(color, _error),
+    do:
+      "text-shadow: -1px -1px 0 #{color}, 1px -1px 0 #{color}, -1px 1px 0 #{color}, 1px 1px 0 #{color};"
 end

@@ -19,28 +19,42 @@ defmodule LabelmakerWeb.Constants do
                   |> Map.keys()
                   |> Enum.map(&Atom.to_string/1)
 
-  @colors System.cmd("magick", ["-list", "color"])
-          |> elem(0)
-          |> String.split("\n")
-          # drop header stuff
-          |> Enum.drop(5)
-          |> Enum.map(fn color_info -> color_info |> String.split() |> List.first() end)
-          |> Enum.reject(&is_nil/1)
-          # filter out colors that end in a number (no CSS equivalent)
-          |> Enum.reject(fn color -> String.match?(color, ~r/\d+$/) end)
-          |> Enum.uniq()
+  @colors [
+    "black",
+    "blue",
+    "brown",
+    "gray",
+    "green",
+    "orange",
+    "pink",
+    "purple",
+    "red",
+    "white",
+    "yellow"
+  ]
 
-  @fonts System.cmd("magick", ["-list", "font"])
-         |> elem(0)
-         |> String.split("\n")
-         |> Enum.filter(&String.starts_with?(&1, "  Font:"))
-         |> Enum.reject(&String.starts_with?(&1, "  Font: ."))
-         |> Enum.map(&String.trim_leading(&1, "  Font: "))
+  @danger "#FF6B6B"
+
+  @font_map %{
+    "cs" => "Comic-Sans-MS",
+    "comic" => "Comic-Sans-MS",
+    "comic sans" => "Comic-Sans-MS",
+    "comic-sans" => "Comic-Sans-MS",
+    "comic-sans-ms" => "Comic-Sans-MS",
+    "cr" => "Courier",
+    "courier" => "Courier",
+    "g" => "Georgia",
+    "georgia" => "Georgia",
+    "h" => "Helvetica",
+    "helvetica" => "Helvetica",
+    "i" => "Impact",
+    "impact" => "Impact",
+    "v" => "Verdana",
+    "verdana" => "Verdana"
+  }
 
   @max_label_length 64
   @max_label_error "64-character maximum"
-
-  @outlines ~w(none white black gray)
 
   @sizes 16..128
          |> Enum.to_list()
@@ -48,13 +62,20 @@ defmodule LabelmakerWeb.Constants do
          |> Enum.map(&Integer.to_string/1)
 
   def colors, do: @colors
-  def color_count, do: @colors |> length()
+  def danger, do: @danger
   def defaults, do: @defaults
-  def fonts, do: @fonts
-  def font_count, do: @fonts |> length()
+
+  def fonts,
+    do:
+      @font_map
+      |> Map.values()
+      |> Enum.uniq()
+      |> Enum.map(fn color -> color |> String.replace("-MS", "") |> String.replace("-", " ") end)
+
+  def font_map, do: @font_map
   def max_label_length, do: @max_label_length
   def max_label_error, do: @max_label_error
-  def outlines, do: @outlines
+  def outlines, do: ["none" | @colors]
   def permitted_keys, do: @permitted_keys
   def preview, do: @preview
   def sizes, do: @sizes
