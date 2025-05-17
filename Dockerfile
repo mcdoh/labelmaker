@@ -21,8 +21,11 @@ ARG RUNNER_IMAGE="debian:${DEBIAN_VERSION}"
 FROM ${BUILDER_IMAGE} AS builder
 
 # install build dependencies
-RUN apt-get update -y && apt-get install -y build-essential git imagemagick ttf-mscorefonts-installer \
-    && apt-get clean && rm -f /var/lib/apt/lists/*_*
+RUN sed -i 's/main/main contrib non-free/g' /etc/apt/sources.list && \
+    apt-get update -y && \
+    apt-get install -y build-essential git imagemagick ttf-mscorefonts-installer && \
+    apt-get clean && \
+    rm -f /var/lib/apt/lists/*_*
 
 # Debian version still uses 'convert'
 RUN ln -s $(which convert) /usr/local/bin/magick
@@ -70,9 +73,11 @@ RUN mix release
 # the compiled release and other runtime necessities
 FROM ${RUNNER_IMAGE}
 
-RUN apt-get update -y && \
-  apt-get install -y libstdc++6 openssl libncurses5 locales ca-certificates imagemagick ttf-mscorefonts-installer \
-  && apt-get clean && rm -f /var/lib/apt/lists/*_*
+RUN sed -i 's/main/main contrib non-free/g' /etc/apt/sources.list && \
+    apt-get update -y && \
+    apt-get install -y libstdc++6 openssl libncurses5 locales ca-certificates imagemagick ttf-mscorefonts-installer && \
+    apt-get clean && \
+    rm -f /var/lib/apt/lists/*_*
 
 # Debian version still uses 'convert'
 RUN ln -s $(which convert) /usr/local/bin/magick
