@@ -35,13 +35,13 @@
 
 ### Customize Font and Size
 
-[https://labelmaker.xyz/Courier?font=Courier&size=96&color=CornFlowerBlue&outline=white](https://labelmaker.xyz/Courier?font=Courier&size=96&color=CornFlowerBlue&outline=white)
+[https://labelmaker.xyz/Comic Sans?font=cs&size=96&color=orange&outline=blue](https://labelmaker.xyz/Comic%20Sans?font=cs&size=96&color=orange&outline=blue)
 
 ![CornflowerBlue Courier](https://labelmaker.xyz/Courier?font=Courier&size=72&color=CornflowerBlue&outline=white)
 
 ### Multiple Lines
 
-[https://labelmaker.xyz/Multiple\nLines?font=DejaVu-Sans-Oblique&color=orange](https://labelmaker.xyz/Multiple\nLines?font=DejaVu-Sans-Oblique&color=orange)
+[https://labelmaker.xyz/Multiple\nLines?font=Impact&color=orange](https://labelmaker.xyz/Multiple\nLines?font=Impact&color=orange)
 
 Use `\n` to insert line breaks.
 
