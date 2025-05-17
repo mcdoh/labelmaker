@@ -1,6 +1,8 @@
 # Labelmaker
 
-[Labelmaker](https://labelmaker.xyz) is a simple web tool for generating text-based images, perfect for creating decals in [Tabletop Simulator](https://www.tabletopsimulator.com/). Just append your desired text to the URL and Labelmaker will return an image, no design tools required.
+[Labelmaker](https://labelmaker.xyz) is a simple web tool for generating text-based images, perfect for creating [decals](https://kb.tabletopsimulator.com/game-tools/decal-tool/) in [Tabletop Simulator](https://www.tabletopsimulator.com/). Just append your desired text to the URL and Labelmaker will return an image, no design tools required. A few options are available via query string parameters: font, color, outline, and size. The homepage offers a form to make things a bit easier.
+
+![Risky business](/images/ukraine_1024x512.png)
 
 ## ✨ Features
 
@@ -15,7 +17,7 @@
 
 [https://labelmaker.xyz/Hello World](https://labelmaker.xyz/Hello%20World)
 
-Generates an image of "Hello World" in the default style.
+(I'm actually cheating here and appended `?outline=white` so that the image is visible on dark backgrounds)
 
 ![Hello World](https://labelmaker.xyz/Hello%20World?outline=white)
 
@@ -23,23 +25,17 @@ Generates an image of "Hello World" in the default style.
 
 [https://labelmaker.xyz/Hello?color=yellow](https://labelmaker.xyz/Hello?color=yellow)
 
-Renders "Hello" in yellow text.
-
 ![Yellow Hello](https://labelmaker.xyz/Hello?color=yellow)
 
 ### Add Outline
 
 [https://labelmaker.xyz/Hello?color=yellow&outline=black](https://labelmaker.xyz/Hello?color=yellow&outline=black)
 
-Renders "Hello" in yellow with a black outline, perfect for contrast on similar backgrounds.
-
 ![Outlined yellow Hello](https://labelmaker.xyz/Hello?color=yellow&outline=black)
 
 ### Customize Font and Size
 
 [https://labelmaker.xyz/Courier?font=Courier&size=96&color=CornFlowerBlue&outline=white](https://labelmaker.xyz/Courier?font=Courier&size=96&color=CornFlowerBlue&outline=white)
-
-Uses the `Courier` font at 96px size.
 
 ![CornflowerBlue Courier](https://labelmaker.xyz/Courier?font=Courier&size=72&color=CornflowerBlue&outline=white)
 
@@ -51,15 +47,6 @@ Use `\n` to insert line breaks.
 
 ![Multiple\nLines](https://labelmaker.xyz/Multiple\nLines?font=DejaVu-Sans-Oblique&size=72&color=orange)
 
-## ⚙️ Query Parameters
-
-| Parameter | Description         | Example Value           |
-| --------- | ------------------- | ----------------------- |
-| `color`   | Text color          | `red`, `CornFlowerBlue` |
-| `outline` | Outline color       | `black`, `white`        |
-| `font`    | Font name           | `Courier`, `Helvetica`  |
-| `size`    | Font size in pixels | `24`, `48`              |
-
 ## 🧪 Try It Live
 
 Visit the [Labelmaker homepage](https://labelmaker.xyz/) to:
@@ -67,6 +54,45 @@ Visit the [Labelmaker homepage](https://labelmaker.xyz/) to:
 - Preview fonts and colors
 - Test out combinations
 - Copy generated URLs for use in Tabletop Simulator or elsewhere
+
+## ⚙️ Query Parameters
+
+| Parameter | Description         | Values            |
+| --------- | ------------------- | ----------------- |
+| `color`   | Text color          | `black`           |
+|           |                     | `blue`            |
+|           |                     | `brown`           |
+|           |                     | `gray`            |
+|           |                     | `green`           |
+|           |                     | `orange`          |
+|           |                     | `pink`            |
+|           |                     | `purple`          |
+|           |                     | `red`             |
+|           |                     | `white`           |
+|           |                     | `yellow`          |
+| `outline` | Outline color       | `none`            |
+|           |                     | `blue`            |
+|           |                     | `brown`           |
+|           |                     | `gray`            |
+|           |                     | `green`           |
+|           |                     | `orange`          |
+|           |                     | `pink`            |
+|           |                     | `purple`          |
+|           |                     | `red`             |
+|           |                     | `white`           |
+|           |                     | `yellow`          |
+| `font`    | Font name           | `Comic Sans (cs)` |
+|           |                     | `Courier (cr)`    |
+|           |                     | `Georgia (g)`     |
+|           |                     | `Helvetica (h)`   |
+|           |                     | `Impact (i)`      |
+|           |                     | `Verdana (v)`     |
+| `size`    | Font size in pixels | `16`              |
+|           |                     | `24`              |
+|           |                     | `32`              |
+|           |                     | `...`             |
+|           |                     | `120`             |
+|           |                     | `128`             |
 
 ## 🧰 Development
 
