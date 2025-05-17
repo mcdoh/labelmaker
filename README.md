@@ -37,7 +37,7 @@
 
 [https://labelmaker.xyz/Comic Sans?font=cs&size=96&color=orange&outline=blue](https://labelmaker.xyz/Comic%20Sans?font=cs&size=96&color=orange&outline=blue)
 
-![CornflowerBlue Courier](https://labelmaker.xyz/Courier?font=Courier&size=72&color=CornflowerBlue&outline=white)
+![Comic Sans](https://labelmaker.xyz/Comic%20Sans?font=cs&size=96&color=orange&outline=blue)
 
 ### Multiple Lines
 
@@ -45,7 +45,7 @@
 
 Use `\n` to insert line breaks.
 
-![Multiple\nLines](https://labelmaker.xyz/Multiple\nLines?font=DejaVu-Sans-Oblique&size=72&color=orange)
+![Multiple\nLines](https://labelmaker.xyz/Multiple\nLines?font=Impact&size=72&color=orange)
 
 ## 🧪 Try It Live
 
