@@ -2,7 +2,7 @@
 
 [Labelmaker](https://labelmaker.xyz) is a simple web tool for generating text-based images, perfect for creating [decals](https://kb.tabletopsimulator.com/game-tools/decal-tool/) in [Tabletop Simulator](https://www.tabletopsimulator.com/). Just append your desired text to the URL and Labelmaker will return an image, no design tools required. A few options are available via query string parameters: font, color, outline, and size. The homepage offers a form to make things a bit easier.
 
-![Risky business](/images/ukraine_1024x512.png)
+![Risky business](/priv/static/images/ukraine_1024x512.png)
 
 ## ✨ Features
 
