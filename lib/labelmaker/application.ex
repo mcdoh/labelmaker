@@ -8,7 +8,7 @@ defmodule Labelmaker.Application do
   @impl true
   def start(_type, _args) do
     children = [
-      # LabelmakerWeb.Telemetry,
+      LabelmakerWeb.Telemetry,
       {DNSCluster, query: Application.get_env(:labelmaker, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: Labelmaker.PubSub},
       # Start a worker by calling: Labelmaker.Worker.start_link(arg)
