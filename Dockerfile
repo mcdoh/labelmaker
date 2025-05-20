@@ -79,6 +79,15 @@ RUN sed -i 's/main/main contrib non-free/g' /etc/apt/sources.list && \
     apt-get clean && \
     rm -f /var/lib/apt/lists/*_*
 
+# fonts for preview
+RUN mkdir -p /app/_build/prod/lib/labelmaker/priv/static/fonts
+RUN ln -s /usr/share/fonts/truetype/msttcorefonts/Comic_Sans_MS.ttf /app/_build/prod/lib/labelmaker/priv/static/fonts
+RUN ln -s /usr/share/fonts/truetype/msttcorefonts/Georgia.ttf /app/_build/prod/lib/labelmaker/priv/static/fonts
+RUN ln -s /usr/share/fonts/truetype/msttcorefonts/Impact.ttf /app/_build/prod/lib/labelmaker/priv/static/fonts
+RUN ln -s /usr/share/fonts/truetype/msttcorefonts/Verdana.ttf /app/_build/prod/lib/labelmaker/priv/static/fonts
+RUN ln -s /usr/share/fonts/opentype/urw-base35/NimbusMonoPS-Regular.otf /app/_build/prod/lib/labelmaker/priv/static/fonts/Courier.otf
+RUN ln -s /usr/share/fonts/opentype/urw-base35/NimbusSans-Regular.otf /app/_build/prod/lib/labelmaker/priv/static/fonts/Helvetica.otf
+
 # Debian version still uses 'convert'
 RUN ln -s $(which convert) /usr/local/bin/magick
 
