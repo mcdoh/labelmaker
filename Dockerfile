@@ -80,15 +80,6 @@ RUN sed -i 's/main/main contrib non-free/g' /etc/apt/sources.list && \
     apt-get clean && \
     rm -f /var/lib/apt/lists/*_*
 
-# fonts for preview
-RUN mkdir -p /app/_build/prod/lib/labelmaker/priv/static/fonts
-RUN cp /usr/share/fonts/truetype/msttcorefonts/Comic_Sans_MS.ttf /app/_build/prod/lib/labelmaker/priv/static/fonts
-RUN cp /usr/share/fonts/truetype/msttcorefonts/Georgia.ttf /app/_build/prod/lib/labelmaker/priv/static/fonts
-RUN cp /usr/share/fonts/truetype/msttcorefonts/Impact.ttf /app/_build/prod/lib/labelmaker/priv/static/fonts
-RUN cp /usr/share/fonts/truetype/msttcorefonts/Verdana.ttf /app/_build/prod/lib/labelmaker/priv/static/fonts
-RUN cp /usr/share/fonts/opentype/urw-base35/NimbusMonoPS-Regular.otf /app/_build/prod/lib/labelmaker/priv/static/fonts/Courier.otf
-RUN cp /usr/share/fonts/opentype/urw-base35/NimbusSans-Regular.otf /app/_build/prod/lib/labelmaker/priv/static/fonts/Helvetica.otf
-
 # Debian version still uses 'convert'
 RUN ln -s $(which convert) /usr/local/bin/magick
 
@@ -100,6 +91,20 @@ ENV LANGUAGE=en_US:en
 ENV LC_ALL=en_US.UTF-8
 
 WORKDIR "/app"
+
+RUN mkdir -p /app/_build/prod/lib/labelmaker/priv/static
+RUN ln -s /app/_build/prod/lib/labelmaker/priv/static static
+
+# fonts for preview
+RUN mkdir -p /app/_build/prod/lib/labelmaker/priv/static/fonts
+RUN cp /usr/share/fonts/truetype/msttcorefonts/Comic_Sans_MS.ttf /app/_build/prod/lib/labelmaker/priv/static/fonts
+RUN cp /usr/share/fonts/truetype/msttcorefonts/Georgia.ttf /app/_build/prod/lib/labelmaker/priv/static/fonts
+RUN cp /usr/share/fonts/truetype/msttcorefonts/Impact.ttf /app/_build/prod/lib/labelmaker/priv/static/fonts
+RUN cp /usr/share/fonts/truetype/msttcorefonts/Verdana.ttf /app/_build/prod/lib/labelmaker/priv/static/fonts
+RUN cp /usr/share/fonts/opentype/urw-base35/NimbusMonoPS-Regular.otf /app/_build/prod/lib/labelmaker/priv/static/fonts/Courier.otf
+RUN cp /usr/share/fonts/opentype/urw-base35/NimbusSans-Regular.otf /app/_build/prod/lib/labelmaker/priv/static/fonts/Helvetica.otf
+
+RUN echo "testing" > static/fonts/test.ttf
 
 # configure the directory for generated images
 # probably need some better permissions here
