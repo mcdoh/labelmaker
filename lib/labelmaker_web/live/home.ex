@@ -75,10 +75,7 @@ defmodule LabelmakerWeb.Home do
           <% end %>
         <% end %>
       </div>
-      <div class="flex flex-row justify-between" style="margin-top: 5px;">
-        <p class="text-xs text-gray-600 dark:text-gray-400 m-0 ml-1">
-          Note: not all fonts are available for preview.
-        </p>
+      <div class="flex flex-row justify-end" style="margin: 5px 0 -15px;">
         <div class="flex flex-row gap-1">
           <div
             phx-click="update_preview"
