@@ -4,6 +4,8 @@
 
 ![Risky business](/priv/static/images/ukraine_1024x512.png)
 
+![Table flip](https://labelmaker.xyz/%28%E2%95%AF%C2%B0%E2%96%A1%C2%B0%29%E2%95%AF%EF%B8%B5%20%7C%5F%5f%7C?color=orange&font=Helvetica&outline=green&size=72)
+
 ## ✨ Features
 
 - 📦 Instant text-to-image conversion via URL
